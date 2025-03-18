@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Student Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+        <h1>Student Dashboard</h1>
+        <form action="/student" method="post">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="text" name="reg_number" placeholder="Registration Number" required>
+            <input type="text" name="year" placeholder="Year of Study" required>
+            <input type="text" name="course" placeholder="Course" required>
+            <button type="submit">Capture Face and Register</button>
+        </form>
+        <hr>
+        <form action="/mark_attendance" method="post">
+            <input type="text" name="reg_number" placeholder="Registration Number" required>
+            <button type="submit">Mark Attendance</button>
+        </form>
+    </div>
+</body>
+</html>

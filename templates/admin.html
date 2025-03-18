@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <img src="{{ url_for('static', filename='login.png') }}" alt="Logo" class="logo">
+        <h1>Admin Dashboard</h1>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Registration Number</th>
+                <th>Image</th>
+                <th>Date</th>
+                <th>Time</th>
+            </tr>
+            {% for record in attendance_records %}
+            <tr>
+                <td>{{ record[0] }}</td>
+                <td>{{ record[1] }}</td>
+                <td>
+                    {% if record[2] %}
+                        <!-- Display the student image -->
+                        <img src="{{ url_for('static', filename=record[2]) }}" alt="Student Image" class="student-image">
+                    {% else %}
+                        No Image
+                    {% endif %}
+                </td>
+                <td>{{ record[3] }}</td>
+                <td>{{ record[4] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
