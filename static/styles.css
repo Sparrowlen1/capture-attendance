@@ -1,75 +1,64 @@
+/* General Body Styling */
 body {
     font-family: Arial, sans-serif;
     background-color: #1e1e2f;
     color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
+    padding: 20px; /* Add padding to avoid edge-to-edge content */
 }
 
+/* Container Styling */
 .container {
     background-color: #2a2a40;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    width: 100%;
-    max-width: 400px;
+    max-width: 1200px; /* Increase width for the admin dashboard */
+    margin: 0 auto; /* Center the container */
+    overflow-x: auto; /* Enable horizontal scrolling if content overflows */
 }
 
-.logo {
-    display: block;
-    margin: 0 auto 20px;
-    width: 200px;  /* Adjust the size as needed */
-    height: auto;
-}
-
-h1 {
-    margin-bottom: 20px;
-}
-
-input {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 5px;
-    background-color: #3a3a4f;
-    color: #ffffff;
-}
-
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #ffffff;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
+/* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    font-size: 14px; /* Reduce font size for better readability */
 }
 
 th, td {
     padding: 10px;
     border: 1px solid #3a3a4f;
+    text-align: center; /* Align text to the center */
 }
 
 th {
     background-color: #007bff;
+    font-weight: bold;
 }
-.student-image {
-    width: 100px;  /* Adjust the size as needed */
-    height: auto;  /* Maintain aspect ratio */
-    border-radius: 5px;  /* Optional: Add rounded corners */
+
+td {
+    white-space: nowrap; /* Prevent text wrapping in cells */
+}
+
+/* Image Styling */
+img {
+    width: 80px; /* Adjust image size */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Optional: Add rounded corners */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px; /* Reduce padding on smaller screens */
+    }
+
+    table {
+        font-size: 12px; /* Further reduce font size for small screens */
+    }
+
+    img {
+        width: 60px; /* Reduce image size further */
+    }
 }

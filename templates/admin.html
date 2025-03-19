@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <title>Admin Dashboard</title>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <!-- Logo -->
-        <img src="{{ url_for('static', filename='login.png') }}" alt="Logo" class="logo">
-        <h1>Admin Dashboard</h1>
-        <table>
+        <h1>Attendance Records</h1>
+        <table border="1">
             <tr>
                 <th>Name</th>
                 <th>Registration Number</th>
-                <th>Image</th>
+                <th>Face Image</th>
                 <th>Date</th>
                 <th>Time</th>
             </tr>
@@ -23,14 +22,7 @@
             <tr>
                 <td>{{ record[0] }}</td>
                 <td>{{ record[1] }}</td>
-                <td>
-                    {% if record[2] %}
-                        <!-- Display the student image -->
-                        <img src="{{ url_for('static', filename=record[2]) }}" alt="Student Image" class="student-image">
-                    {% else %}
-                        No Image
-                    {% endif %}
-                </td>
+                <td><img src="{{ url_for('static', filename=record[2]) }}" alt="Face Image"></td>
                 <td>{{ record[3] }}</td>
                 <td>{{ record[4] }}</td>
             </tr>

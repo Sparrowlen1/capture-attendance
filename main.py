@@ -42,11 +42,6 @@ def capture_face(reg_number):
         cap.release()
         return None
 
-    # Save the captured frame for debugging
-    debug_filename = f"debug_{reg_number}.jpg"
-    cv2.imwrite(debug_filename, frame)
-    print(f"Debug image saved as {debug_filename}")
-
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5, minSize=(50, 50))
 
@@ -54,8 +49,9 @@ def capture_face(reg_number):
         (x, y, w, h) = faces[0]
         face = frame[y:y+h, x:x+w]
         face_filename = f"student_images/{reg_number}.jpg"
-        cv2.imwrite(face_filename, face)
-        print(f"Face captured and saved as {face_filename}")
+        os.makedirs(os.path.dirname(f"static/{face_filename}"), exist_ok=True)
+        cv2.imwrite(f"static/{face_filename}", face)
+        print(f"Face captured and saved as static/{face_filename}")
         cap.release()
         return face_filename
     else:
@@ -112,16 +108,26 @@ def student():
         reg_number = request.form['reg_number']
         year = request.form['year']
         course = request.form['course']
+
+        # Check if the registration number already exists
+        conn = sqlite3.connect('attendance.db')
+        c = conn.cursor()
+        c.execute("SELECT * FROM students WHERE reg_number = ?", (reg_number,))
+        existing_student = c.fetchone()
+        if existing_student:
+            conn.close()
+            return "A student with this registration number already exists."
+
+        # Capture the face image
         face_filename = capture_face(reg_number)
         if face_filename:
-            conn = sqlite3.connect('attendance.db')
-            c = conn.cursor()
             c.execute("INSERT INTO students (name, reg_number, year, course, face_image) VALUES (?, ?, ?, ?, ?)",
                       (name, reg_number, year, course, face_filename))
             conn.commit()
             conn.close()
             return "Student registered successfully"
         else:
+            conn.close()
             return "Face capture failed. Ensure your face is clearly visible and well-lit."
     return render_template('student.html')
 
